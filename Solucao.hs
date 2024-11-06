@@ -20,6 +20,8 @@ module Solucao where
 
     move_varios :: [([Coordenadas], ID)] -> [Estado] -> [(Estado, ID)]
     move_varios [] [] = []
+    move_varios [] estados = zip estados [0..] -- Se não há movimentos, retorna os estados iniciais
+    move_varios naves [] = [] -- Se não há estados, retorna uma lista vazia
     move_varios ((movimentos, idNave):naves) (estado:estados) =
         let estadoFinal = move_lista movimentos estado
         in (estadoFinal, idNave) : move_varios naves estados
@@ -33,6 +35,8 @@ module Solucao where
 
     move_varios_atualizado :: [([Coordenadas], ID)] -> [Estado] -> [(Estado, ID)]
     move_varios_atualizado [] [] = []
+    move_varios_atualizado [] estados = zip estados [0..] -- Se não há movimentos, retorna os estados iniciais
+    move_varios_atualizado naves [] = [] -- Se não há estados, retorna uma lista vazia
     move_varios_atualizado naves estadosIniciais =
         let 
             -- Calcula os estados finais aplicando todos os movimentos para cada nave
